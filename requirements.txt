@@ -1,0 +1,4 @@
+openai==0.26.4
+streamlit==1.19.0
+streamlit_chat==0.0.2.1
+~treamlit==1.12.2
