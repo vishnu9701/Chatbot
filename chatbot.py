@@ -2,7 +2,7 @@ import openai
 import streamlit as st
 from streamlit_chat import message
 
-openai.api_key =st.secrets["key"]
+openai.api_key = st.secrets["key"]
 
 # This function uses the OpenAI Completion API to generate a 
 # response based on the given prompt. The temperature parameter controls 
@@ -32,9 +32,12 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
     st.session_state['past'] = []
 
+if 'user_input' not in st.session_state:
+    st.session_state.user_input = ''
+
 
 def get_text():
-    input_text = st.text_input("You: ",placeholder="Type your Msg", key="input")
+    input_text = st.text_input("You: ", placeholder="Type your Msg", key="input", value=st.session_state.user_input)
     return input_text 
 
 
@@ -42,10 +45,10 @@ user_input = get_text()
 
 if user_input:
     output = generate_response(user_input)
-    user_input = '' 
     st.session_state.past.append(user_input)
     st.session_state.generated.append(output)
-    
+    st.session_state.user_input = ''  # clear text input
+
 
 if st.session_state['generated']:
 
