@@ -42,9 +42,10 @@ user_input = get_text()
 
 if user_input:
     output = generate_response(user_input)
+    user_input = '' 
     st.session_state.past.append(user_input)
     st.session_state.generated.append(output)
-    user_input = '' 
+    
 
 if st.session_state['generated']:
 
